@@ -1,65 +1,56 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
 
-int LastOccr(int Arr[], int iSize, int iNo)
+
+int DiffMaxMin(int Arr[],int iLength)
 {
-    int iCnt = 0;
-    short int iFlag = 0;
+    int i = 0 , iMax = Arr[0] , iMin = Arr[0];
 
-    for (iCnt = iSize; iCnt >= 0; iCnt--)
+    for (i = 0 ; i < iLength ; i++)
     {
-        if (iNo == Arr[iCnt])
+        if (Arr[i] > iMax)
         {
-            iFlag = iCnt;
-            break;
+            iMax = Arr[i];
         }
-        else
+        else if (Arr[i] < iMin)
         {
-            iFlag = -1;
+            iMin = Arr[i];
         }
     }
-
-    return iFlag;
+    return (iMax - iMin);  
 }
 
 int main()
 {
-    int iLength = 0;
-    int *ptr = NULL;
-    int iCnt = 0;
-    int iValue = 0;
-    int iRet = 0;
+    int iCnt = 0 , iSize = 0 , iRet = 0 ;
+    int * p = NULL;
 
-    printf("Enter the no. of element\n");
-    scanf("%d", &iLength);
+    printf("Enter number's of element : ");
+    scanf("%d",&iSize);
 
-    printf("Enter the number to check\n");
-    scanf("%d", &iValue);
+    p = (int *)malloc(iSize * sizeof(int));
 
-    ptr = (int *)malloc(iLength * sizeof(int));
-
-    if (NULL == ptr)
+    //Memory unavailable
+    if (p == NULL)
     {
-        printf("Unable to allocate the memory\n");
+        printf("Unable to allocate memory ");
+        return -1;
     }
 
-    printf("Enter the element:\n");
-    for (iCnt = 0; iCnt < iLength; iCnt++)
+    printf("Enter %d elements : ",iSize);
+
+    for (iCnt = 0; iCnt < iSize; iCnt++)
     {
-        scanf("%d", &ptr[iCnt]);
+        printf("Enter element  %d : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
     }
 
-    iRet = LastOccr(ptr, iLength, iValue);
+    iRet = DiffMaxMin( p, iSize);
 
-    if (iRet == -1)
-    {
-        printf("There is no such number present.\n");
-    }
-    else
-    {
-        printf("The last Occurence of number is in %d ", iRet);
-    }
-    free(ptr);
+    printf("The Difference of maximum and minium number is : %d",iRet);
+
+    free(p);
 
     return 0;
-}
+} 

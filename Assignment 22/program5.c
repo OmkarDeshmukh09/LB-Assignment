@@ -1,33 +1,32 @@
 #include <stdio.h>
 #include<stdlib.h>
 
-int Frequency(int Arr[] , int iLength , )
+int Frequency(int Arr[] , int iLength , int No )
 {
-    int iEven = 0 , i = 0 , iOdd = 0 ;
+    int iCount = 0 , i = 0 ;
 
     for (i = 0 ; i < iLength ; i++)
     {
-        if (Arr[i] % 2 == 0)
+        if (Arr[i] == No)
         {
-            iEven++;
-        }
-        if (Arr[i] % 2 != 0)
-        {
-            iOdd++;
+            iCount++;
         }
     }
-    return ( iEven - iOdd );
+    return iCount;
 }
 
 int main()
 {
-    int iSize = 0 , iRet = 0 , iCnt = 0 , iN = 0;
+    int iValue1 = 0 , iValue2 = 0 , iRet = 0 , iCnt = 0 , iN = 0;
     int *p = NULL;
 
     printf("Enter number of elements");
-    scanf("%d",&iSize);
+    scanf("%d",&iValue1);
 
-    p = (int * ) malloc (iSize * sizeof(int));
+    printf("Enter the number :");
+    scanf("%d",&iValue2);
+
+    p = (int * ) malloc (iValue1 * sizeof(int));
 
     //Memory unavailable
     if (p == NULL)
@@ -36,14 +35,14 @@ int main()
         return -1;
     }
 
-    printf("Enter %d elements ",iSize);
+    printf("Enter %d elements ",iValue1);
 
-    for (iCnt = 0; iCnt < iSize; iCnt++)
+    for (iCnt = 0; iCnt < iValue1; iCnt++)
     {
         printf("Enter element  %d : ",iCnt+1);
         scanf("%d",&p[iCnt]);
     }
-    iRet = Frequency(p,iSize);
+    iRet = Frequency(p,iValue1,iValue2);
 
     printf("Result is %d",iRet);
 

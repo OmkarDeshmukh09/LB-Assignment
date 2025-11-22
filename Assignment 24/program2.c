@@ -3,33 +3,29 @@
 #include<stdlib.h>
 
 
-bool Check(int Arr[],int iLength , int iNo)
+int Minium(int Arr[],int iLength)
 {
-    int iEven = 0 , i = 0 , iOdd = 0 ;
+    int i = 0 , iMin = Arr[0] ;
 
     for (i = 0 ; i < iLength ; i++)
     {
-        if (Arr[i]  == iNo)
+        if (Arr[i] < iMin)
         {
-            return true;
+            iMin = Arr[i];
         }
     }
-    return false;    
+    return iMin;  
 }
 
 int main()
 {
-    int iCnt = 0 , iValue1 = 0, iValue2 = 0 ;
-    bool iRet = 0 ;
+    int iCnt = 0 , iSize = 0 , iRet = 0 ;
     int * p = NULL;
 
     printf("Enter number's of element : ");
-    scanf("%d",&iValue1);
+    scanf("%d",&iSize);
 
-    printf("Enter the number ");
-    scanf("%d",&iValue2);
-
-    p = (int *)malloc(iValue1 * sizeof(int));
+    p = (int *)malloc(iSize * sizeof(int));
 
     //Memory unavailable
     if (p == NULL)
@@ -38,23 +34,17 @@ int main()
         return -1;
     }
 
-    printf("Enter %d elements ",iValue1);
+    printf("Enter %d elements : ",iSize);
 
-    for (iCnt = 0; iCnt < iValue1; iCnt++)
+    for (iCnt = 0; iCnt < iSize; iCnt++)
     {
         printf("Enter element  %d : ",iCnt+1);
         scanf("%d",&p[iCnt]);
     }
-    iRet = Check( p, iValue1 ,iValue2);
 
-    if (iRet == true)
-    {
-        printf(" 1 ");
-    }
-    else
-    {
-        printf(" -1 ");
-    }
+    iRet = Minium( p, iSize);
+
+    printf("The Minium No is : %d",iRet);
 
     free(p);
 

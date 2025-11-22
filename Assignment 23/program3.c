@@ -1,65 +1,67 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
 
-int LastOccr(int Arr[], int iSize, int iNo)
+
+int LastOcc(int Arr[],int iLength , int iNo)
 {
-    int iCnt = 0;
-    short int iFlag = 0;
+    int i = 0 , itemp = 0;
 
-    for (iCnt = iSize; iCnt >= 0; iCnt--)
+    for (i = 0 ; i < iLength ; i++)
     {
-        if (iNo == Arr[iCnt])
+        if (Arr[i]  == iNo)
         {
-            iFlag = iCnt;
-            break;
-        }
-        else
-        {
-            iFlag = -1;
+            itemp = i;
         }
     }
-
-    return iFlag;
+    if (itemp == 0)
+    {
+        itemp = -1;
+    }
+    return itemp ;        
 }
 
 int main()
 {
-    int iLength = 0;
-    int *ptr = NULL;
-    int iCnt = 0;
-    int iValue = 0;
-    int iRet = 0;
+    int iCnt = 0 , iLength = 0, iValue2 = 0 ;
+    int iRet = 0 ;
+    int * p = NULL;
 
-    printf("Enter the no. of element\n");
-    scanf("%d", &iLength);
+    printf("Enter number's of element : ");
+    scanf("%d",&iLength);
 
-    printf("Enter the number to check\n");
-    scanf("%d", &iValue);
+    printf("Enter the number ");
+    scanf("%d",&iValue2);
 
-    ptr = (int *)malloc(iLength * sizeof(int));
+    p = (int *)malloc(iLength * sizeof(int));
 
-    if (NULL == ptr)
+    //Memory unavailable
+    if (p == NULL)
     {
-        printf("Unable to allocate the memory\n");
+        printf("Unable to allocate memory ");
+        return -1;
     }
 
-    printf("Enter the element:\n");
+    printf("Enter %d elements ",iLength);
+
     for (iCnt = 0; iCnt < iLength; iCnt++)
     {
-        scanf("%d", &ptr[iCnt]);
+        printf("Enter element  %d : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
     }
 
-    iRet = LastOccr(ptr, iLength, iValue);
+    iRet = LastOcc( p, iLength ,iValue2);
 
     if (iRet == -1)
     {
-        printf("There is no such number present.\n");
+        printf(" There is no such number ");
     }
     else
     {
-        printf("The last Occurence of number is in %d ", iRet);
+        printf(" Last occurrenc of number  is %d ",iRet);
     }
-    free(ptr);
+
+    free(p);
 
     return 0;
-}
+} 

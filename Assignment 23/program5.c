@@ -1,49 +1,66 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
 
-int Product(int Arr[], int iSize)
+
+int OddProduct(int Arr[],int iLength)
 {
-    int iCnt = 0;
-    int iPro=1;
+    int i = 0 , iMulti = 1 ;
 
-    
-    for (iCnt = 0; iCnt < iSize; iCnt++)
+    for (i = 0 ; i < iLength ; i++)
     {
-        if(Arr[iCnt] % 2 == 1 )
+        if (Arr[i] % 2 != 0)
         {
-            iPro=iPro*Arr[iCnt];
+            iMulti = iMulti * Arr[i];
         }
     }
-    return iPro;
+    if (iMulti > 1)
+    {
+        return iMulti;
+    }
+    else
+    {    
+        return (0);
+    }  
 }
 
 int main()
 {
-    int iLength = 0;
-    int *ptr = NULL;
-    int iCnt = 0;
-    int iRet = 0;
+    int iCnt = 0 , iLength = 0 , iRet = 0;
+    int * p = NULL;
 
-    printf("Enter the no. of element\n");
-    scanf("%d", &iLength);
+    printf("Enter number's of element : ");
+    scanf("%d",&iLength);
 
-    ptr = (int *)malloc(iLength * sizeof(int));
+    p = (int *)malloc(iLength * sizeof(int));
 
-    if (NULL == ptr)
+    //Memory unavailable
+    if (p == NULL)
     {
-        printf("Unable to allocate the memory\n");
+        printf("Unable to allocate memory ");
+        return -1;
     }
 
-    printf("Enter the element:\n");
+    printf("Enter %d elements ",iLength);
+
     for (iCnt = 0; iCnt < iLength; iCnt++)
     {
-        scanf("%d", &ptr[iCnt]);
+        printf("Enter element  %d : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
     }
 
-    iRet = Product(ptr, iLength);
-    printf("The product of odd element is : %d", iRet);
+    iRet = OddProduct( p, iLength);
 
-    free(ptr);
+    if (iRet <= 0)
+    {
+        printf("The No Odd numbers found");
+    }
+    else
+    {
+        printf("The Product is : %d",iRet);
+    }
+
+    free(p);
 
     return 0;
-}
+} 
